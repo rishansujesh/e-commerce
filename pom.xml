@@ -11,10 +11,18 @@
     <module>services/orders</module>
     <module>services/payments</module>
     <module>services/shipping</module>
+<<<<<<< rishansujesh/build-application-from-scratch-0yo08w
+  </modules>
+
+  <properties>
+    <java.version>21</java.version>
+    <maven.compiler.release>21</maven.compiler.release>
+=======
   </modules> 
   
   <properties>
 
+>>>>>>> main
     <spring-boot.version>3.3.0</spring-boot.version>
   </properties>
 
