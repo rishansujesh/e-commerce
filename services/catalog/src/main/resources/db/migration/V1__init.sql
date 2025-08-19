@@ -1,0 +1,8 @@
+CREATE TABLE product (
+    id UUID PRIMARY KEY,
+    sku TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    price NUMERIC(10,2) NOT NULL,
+    stock INT NOT NULL,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);

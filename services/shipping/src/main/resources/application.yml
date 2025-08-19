@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: shipping
+  datasource:
+    url: ${SHIPPING_DB_URL}
+    username: ${SHIPPING_DB_USER}
+    password: ${SHIPPING_DB_PASS}
+  jpa:
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: true
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
