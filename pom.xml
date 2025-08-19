@@ -11,11 +11,10 @@
     <module>services/orders</module>
     <module>services/payments</module>
     <module>services/shipping</module>
-  </modules>
-
+  </modules> 
+  
   <properties>
-    <java.version>21</java.version>
-    <maven.compiler.release>21</maven.compiler.release>
+
     <spring-boot.version>3.3.0</spring-boot.version>
   </properties>
 
