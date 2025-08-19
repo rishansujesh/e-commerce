@@ -94,6 +94,8 @@ services:
       CATALOG_DB_PASS: ${CATALOG_DB_PASS}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
+    ports:
+      - "8081:8080"
 
   orders-service:
     build: ./services/orders
@@ -109,6 +111,8 @@ services:
       ORDERS_DB_PASS: ${ORDERS_DB_PASS}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
+    ports:
+      - "8082:8080"
 
   payments-service:
     build: ./services/payments
@@ -124,6 +128,8 @@ services:
       PAYMENTS_DB_PASS: ${PAYMENTS_DB_PASS}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
+    ports:
+      - "8083:8080"
 
   shipping-service:
     build: ./services/shipping
@@ -139,6 +145,8 @@ services:
       SHIPPING_DB_PASS: ${SHIPPING_DB_PASS}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
+    ports:
+      - "8084:8080"
 
 networks:
   default:

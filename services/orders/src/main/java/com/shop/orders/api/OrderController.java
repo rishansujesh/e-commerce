@@ -24,12 +24,16 @@ class OrderController {
     }
 
     @GetMapping("/{id}")
-    OrderResponse get(@PathVariable UUID id) {
-        return service.getOrder(id);
+    OrderSummaryResponse get(@PathVariable UUID id) {
+        return toResponse(service.getOrder(id));
     }
 
     @PostMapping("/{id}/cancel")
     OrderResponse cancel(@PathVariable UUID id) {
         return service.cancelOrder(id);
+    }
+
+    private static OrderSummaryResponse toResponse(com.shop.orders.domain.OrderSummary summary) {
+        return new OrderSummaryResponse(summary.id(), summary.status(), summary.total());
     }
 }

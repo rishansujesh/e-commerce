@@ -20,13 +20,15 @@ class OrderService {
     private final OutboxRepository outboxRepository;
     private final CatalogClient catalogClient;
     private final ObjectMapper objectMapper;
+    private final OrderCache cache;
 
     OrderService(OrderRepository orderRepository, OutboxRepository outboxRepository,
-                 CatalogClient catalogClient, ObjectMapper objectMapper) {
+                 CatalogClient catalogClient, ObjectMapper objectMapper, OrderCache cache) {
         this.orderRepository = orderRepository;
         this.outboxRepository = outboxRepository;
         this.catalogClient = catalogClient;
         this.objectMapper = objectMapper;
+        this.cache = cache;
     }
 
     @Transactional
@@ -50,6 +52,7 @@ class OrderService {
         }
         OutboxMessage msg = new OutboxMessage(UUID.randomUUID(), "Order", order.getId(), "order.created", payload, Instant.now(), order.getId().toString());
         outboxRepository.save(msg);
+        cache.put(new OrderSummary(order.getId(), order.getStatus(), order.getTotal()));
         return toResponse(order);
     }
 
@@ -63,6 +66,7 @@ class OrderService {
             order.setStatus(OrderStatus.CANCELLED);
             createOutbox(order, "order.cancelled");
         }
+        cache.put(new OrderSummary(order.getId(), order.getStatus(), order.getTotal()));
     }
 
     private void createOutbox(Order order, String eventType) {
@@ -76,18 +80,23 @@ class OrderService {
         }
     }
 
-    public OrderResponse getOrder(UUID id) {
-        Order order = orderRepository.findById(id).orElseThrow();
-        return toResponse(order);
+    public OrderSummary getOrder(UUID id) {
+        return cache.get(id).orElseGet(() -> {
+            Order order = orderRepository.findById(id).orElseThrow();
+            OrderSummary summary = new OrderSummary(order.getId(), order.getStatus(), order.getTotal());
+            cache.put(summary);
+            return summary;
+        });
     }
 
-    
-    
+
+
     @Transactional
     public OrderResponse cancelOrder(UUID id) {
         Order order = orderRepository.findById(id).orElseThrow();
         order.setStatus(OrderStatus.CANCELLED);
         createOutbox(order, "order.cancelled");
+        cache.put(new OrderSummary(order.getId(), order.getStatus(), order.getTotal()));
         return toResponse(order);
     }
 
