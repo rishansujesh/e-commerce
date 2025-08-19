@@ -1,8 +1,3 @@
-diff --git a//dev/null b/pom.xml
-index 0000000000000000000000000000000000000000..b3506efb41e22c7aa778300c099ff8a41433c6ee 100644
---- a//dev/null
-+++ b/pom.xml
-@@ -0,0 +1,33 @@
 +<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 +  <modelVersion>4.0.0</modelVersion>
 +
