@@ -1,0 +1,24 @@
+# Maven
+/target/
+*.log
+*.tmp
+*.out
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# OS generated
+.DS_Store
+
+# Env files
+.env
+
